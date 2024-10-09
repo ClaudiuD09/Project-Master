@@ -40,6 +40,7 @@ an essential role in the ongoing improvement of the application.
 
 ![scena](https://github.com/user-attachments/assets/06c0e931-f98c-494a-b7cf-f4763b0d8287)
 
+https://github.com/user-attachments/assets/d4025d6f-f96e-4cdf-95cc-ff12e463988a
 
 
 
