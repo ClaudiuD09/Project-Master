@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
-* text=auto
+*.gd linguist-language=GDScript
+*.tscn linguist-language=GDScript
+*.gd linguist-language=GDScript
+*.gdns linguist-language=GDScript
+*.tres linguist-language=GDScript
