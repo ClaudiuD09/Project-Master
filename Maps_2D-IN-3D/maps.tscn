@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://ekeo6heksf25"]
+
+[node name="Maps" type="Node3D"]
+
+[node name="SubViewport" type="SubViewport" parent="."]

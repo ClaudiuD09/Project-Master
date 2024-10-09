@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://vxhyo65bny5r"]
+
+[ext_resource type="Script" path="res://Chat/Chat.gd" id="1_7cpjg"]
+[ext_resource type="Script" path="res://Chat/Message.gd" id="2_joh7u"]
+
+[node name="Chat" type="Control"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+script = ExtResource("1_7cpjg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 321.0
+grow_horizontal = 0
+
+[node name="Space3" type="VSplitContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="Label" type="Label" parent="VBoxContainer/ColorRect"]
+layout_mode = 2
+offset_top = 4.0
+offset_right = 200.0
+offset_bottom = 27.0
+text = "Chat System"
+horizontal_alignment = 1
+
+[node name="Space2" type="VSplitContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="messages" type="TextEdit" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+editable = false
+
+[node name="Message" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter Message"
+alignment = 1
+script = ExtResource("2_joh7u")
+
+[node name="Space" type="VSplitContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="send" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+text = "Send"
+
+[connection signal="focus_entered" from="VBoxContainer/Message" to="." method="_on_message_focus_entered"]
+[connection signal="focus_exited" from="VBoxContainer/Message" to="." method="_on_message_focus_exited"]
+[connection signal="pressed" from="VBoxContainer/send" to="." method="_on_send_pressed"]

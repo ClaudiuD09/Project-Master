@@ -1,0 +1,12 @@
+res://addons/virtual_joystick/test/test.tscn::9f826ef1421d5423f5348927df9eb4c0::1717615648::res://.godot/exported/133200997/export-65fc1102b221e3c86f8828aab5faf636-test.scn
+res://addons/virtual_joystick/virtual_joystick_scene.tscn::c47f4bc864545c023e725d20482526d6::1717615648::res://.godot/exported/133200997/export-4fefb2d1c978e429fe9cfeba8aa59129-virtual_joystick_scene.scn
+res://Maps_2D/main.tscn::32b198cd51d1f9a0fea9318058913ea6::1720369089::res://.godot/exported/133200997/export-a60292e4e6f2d3b9be0ff5b0ade818fb-main.scn
+res://Maps_3D/main.tscn::da0268102d2b52a716bd5462d1a6299b::1720369118::res://.godot/exported/133200997/export-c5bf9450e0f6bd52544c1105867bdd6f-main.scn
+res://Network/multiplayer_ui.tscn::6781b608bf7eb9a4919eb614e80b0191::1720369089::res://.godot/exported/133200997/export-6c15fcafce28a54f6ed153e0f10a49b3-multiplayer_ui.scn
+res://Player_2D/player_2d.tscn::258a65a9e695a838b4e7686b9a98d52e::1720369089::res://.godot/exported/133200997/export-a5bbebd40714484f4f286838189e7ce7-player_2d.scn
+res://Player_3D/player_3d.tscn::49fe077c34e2e4b2264ae43403f154c0::1720369089::res://.godot/exported/133200997/export-1d0ccb38f882e311300e8442ad45d91e-player_3d.scn
+res://Assets/escape/escape.tscn::27d0e3c4e80e1d05d3ebca63dc380af1::1720369089::res://.godot/exported/133200997/export-e10054d6da6c1e66c7fba342e50c8ef7-escape.scn
+res://Assets/multiplayer_ui_character_choose.tres::978f580ca997bd094547b332ba9e93af::1717615648::res://.godot/exported/133200997/export-7109f00a35f8456052d6af3b2d482ad6-multiplayer_ui_character_choose.res
+res://Chat/Chat.tscn::ac7a1b4415e055315d9f84572f7f7659::1720369089::res://.godot/exported/133200997/export-57e07a50166db9549012c31d4e549286-Chat.scn
+res://NPC/NPC.tscn::c14d59dd1e2f1504e05a31263b38540a::1720369089::res://.godot/exported/133200997/export-170fc4a3194626a2b305a13b3c78510e-NPC.scn
+res://Player_3D/player_3d_1.tscn::e95da0d8fcceced07c5659eb2efec636::1720369089::res://.godot/exported/133200997/export-30ee0d40257482054f215dee2cdb78b8-player_3d_1.scn

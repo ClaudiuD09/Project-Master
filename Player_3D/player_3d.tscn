@@ -1,0 +1,278 @@
+[gd_scene load_steps=30 format=3 uid="uid://cnfxgkdfg0ijm"]
+
+[ext_resource type="Script" path="res://Player_3D/player_3d.gd" id="1_42266"]
+[ext_resource type="Script" path="res://Player_3D/PlayerInput.gd" id="2_0ihi8"]
+[ext_resource type="AnimationLibrary" uid="uid://chspp1vwo23xs" path="res://Animations/player3d.res" id="2_3owjq"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="4_epybd"]
+[ext_resource type="Texture2D" uid="uid://brce3eupvt7y8" path="res://img/Jump_UP.png" id="5_n8iql"]
+[ext_resource type="Texture2D" uid="uid://copn6mok3wmyx" path="res://img/Jump_DOWN.png" id="6_as11f"]
+[ext_resource type="Texture2D" uid="uid://bji48ow4dm1js" path="res://img/Sprint_UP.png" id="7_cotf8"]
+[ext_resource type="Texture2D" uid="uid://cq5ryoimcgal6" path="res://img/Sprint_DOWN.png" id="8_bwjf7"]
+[ext_resource type="Texture2D" uid="uid://bb270xgdqr072" path="res://img/Chat_UP.png" id="9_d80bd"]
+[ext_resource type="Texture2D" uid="uid://cr7kibs2k2hei" path="res://img/Chat_DOWN.png" id="10_3jo4u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xj2y8"]
+albedo_color = Color(0.619608, 0.345098, 0.0823529, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_b0nix"]
+material = SubResource("StandardMaterial3D_xj2y8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8lsjf"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4fsaw"]
+material = SubResource("StandardMaterial3D_8lsjf")
+radius = 0.1
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwyow"]
+albedo_color = Color(0.231373, 0.231373, 0.231373, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_cxmkx"]
+material = SubResource("StandardMaterial3D_kwyow")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mge5c"]
+albedo_color = Color(0.235294, 0.196078, 0.521569, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_c1p6b"]
+material = SubResource("StandardMaterial3D_mge5c")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u3gxi"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_xoxlv"]
+properties/0/path = NodePath(".:player")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:velocity")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:transform")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:motion")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Player_model:transform")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath(".:current_animation")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath(".:color")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_cmtt2"]
+properties/0/path = NodePath(".:direction")
+properties/0/spawn = false
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:running")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("../Camera_Base:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("../Camera_Base/Camera_Rotation:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:movement")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u464h"]
+animation = &"player3d/jump"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_kurrn"]
+input_0/name = "walk"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "jump"
+input_1/auto_advance = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hhal4"]
+animation = &"player3d/idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4cqwe"]
+animation = &"player3d/walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7u0f1"]
+animation = &"player3d/run"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_3yvhu"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_hhal4")
+blend_point_0/pos = Vector2(0, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_4cqwe")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_7u0f1")
+blend_point_2/pos = Vector2(1, 1)
+min_space = Vector2(0, 0)
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_yiy0y"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_mirxf"]
+nodes/JUMP/node = SubResource("AnimationNodeAnimation_u464h")
+nodes/JUMP/position = Vector2(-380, -40)
+nodes/output/position = Vector2(360, 60)
+nodes/state/node = SubResource("AnimationNodeTransition_kurrn")
+nodes/state/position = Vector2(20, 20)
+nodes/walk/node = SubResource("AnimationNodeBlendSpace2D_3yvhu")
+nodes/walk/position = Vector2(-560, 80)
+nodes/walk_speed/node = SubResource("AnimationNodeTimeScale_yiy0y")
+nodes/walk_speed/position = Vector2(-240, 180)
+node_connections = [&"output", 0, &"state", &"state", 0, &"walk_speed", &"state", 1, &"JUMP", &"walk_speed", 0, &"walk"]
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_42266")
+
+[node name="Player_model" type="Node3D" parent="."]
+
+[node name="corp" type="MeshInstance3D" parent="Player_model"]
+mesh = SubResource("CapsuleMesh_b0nix")
+skeleton = NodePath("../..")
+
+[node name="head" type="Node3D" parent="Player_model"]
+
+[node name="head" type="MeshInstance3D" parent="Player_model/head"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.740304, -0.428652)
+mesh = SubResource("CapsuleMesh_4fsaw")
+skeleton = NodePath("../../corp")
+
+[node name="eye_left" type="MeshInstance3D" parent="Player_model/head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0.8, -0.3)
+mesh = SubResource("SphereMesh_cxmkx")
+
+[node name="eye_right" type="MeshInstance3D" parent="Player_model/head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.8, -0.3)
+mesh = SubResource("SphereMesh_cxmkx")
+
+[node name="hands" type="Node3D" parent="Player_model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.158271, -0.2)
+
+[node name="hand_left" type="MeshInstance3D" parent="Player_model/hands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0, 0)
+mesh = SubResource("SphereMesh_c1p6b")
+skeleton = NodePath("../../corp")
+
+[node name="hand_right" type="MeshInstance3D" parent="Player_model/hands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0, 0)
+mesh = SubResource("SphereMesh_c1p6b")
+skeleton = NodePath("../../corp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player_model"]
+root_node = NodePath("../..")
+libraries = {
+"player3d": ExtResource("2_3owjq")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_u3gxi")
+
+[node name="Camera_Base" type="Node3D" parent="."]
+
+[node name="Camera_Rotation" type="Node3D" parent="Camera_Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Camera_Base/Camera_Rotation"]
+collision_mask = 2
+spring_length = 2.5
+
+[node name="Camera3D" type="Camera3D" parent="Camera_Base/Camera_Rotation/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.956305, 0.292372, 0, -0.292372, 0.956305, 0, 0, 2)
+
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_xoxlv")
+
+[node name="PlayerInput" type="MultiplayerSynchronizer" parent="." node_paths=PackedStringArray("camera_base", "camera_rotation", "camera_3D", "joystick")]
+root_path = NodePath(".")
+replication_config = SubResource("SceneReplicationConfig_cmtt2")
+script = ExtResource("2_0ihi8")
+camera_base = NodePath("../Camera_Base")
+camera_rotation = NodePath("../Camera_Base/Camera_Rotation")
+camera_3D = NodePath("../Camera_Base/Camera_Rotation/SpringArm3D/Camera3D")
+joystick = NodePath("UI/Joystick Camera")
+
+[node name="UI" type="CanvasLayer" parent="PlayerInput"]
+process_mode = 4
+layer = 3
+visible = false
+
+[node name="Joystick Movement" parent="PlayerInput/UI" instance=ExtResource("4_epybd")]
+offset_left = 30.0
+offset_top = -230.0
+offset_right = 230.0
+offset_bottom = -30.0
+pressed_color = Color(0, 0.356863, 0.65098, 1)
+joystick_mode = 1
+
+[node name="Joystick Camera" parent="PlayerInput/UI" instance=ExtResource("4_epybd")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -230.0
+offset_top = -230.0
+offset_right = -30.0
+offset_bottom = -30.0
+grow_horizontal = 0
+pressed_color = Color(0, 0.356863, 0.65098, 1)
+joystick_mode = 1
+use_input_actions = false
+
+[node name="Right_Down" type="Control" parent="PlayerInput/UI"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Jump" type="TouchScreenButton" parent="PlayerInput/UI/Right_Down"]
+position = Vector2(-370, -100)
+scale = Vector2(0.05, 0.05)
+texture_normal = ExtResource("5_n8iql")
+texture_pressed = ExtResource("6_as11f")
+action = "ui_accept"
+
+[node name="Run" type="TouchScreenButton" parent="PlayerInput/UI/Right_Down"]
+position = Vector2(-370, -230)
+scale = Vector2(0.05, 0.05)
+texture_normal = ExtResource("7_cotf8")
+texture_pressed = ExtResource("8_bwjf7")
+action = "run"
+
+[node name="Left_Down" type="Control" parent="PlayerInput/UI"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="Chat" type="TouchScreenButton" parent="PlayerInput/UI/Left_Down"]
+position = Vector2(20, -350)
+scale = Vector2(0.05, 0.05)
+texture_normal = ExtResource("9_d80bd")
+texture_pressed = ExtResource("10_3jo4u")
+action = "chat"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"player3d": ExtResource("2_3owjq")
+}
+tree_root = SubResource("AnimationNodeBlendTree_mirxf")
+anim_player = NodePath("../Player_model/AnimationPlayer")
+parameters/state/current_state = "walk"
+parameters/state/transition_request = ""
+parameters/state/current_index = 0
+parameters/walk/blend_position = Vector2(0, 0)
+parameters/walk_speed/scale = 1.0

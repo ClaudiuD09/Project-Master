@@ -1,0 +1,254 @@
+[gd_scene load_steps=27 format=3 uid="uid://bo2fpxsua6ctn"]
+
+[ext_resource type="Script" path="res://NPC/NPC.gd" id="1_c0k4f"]
+[ext_resource type="AnimationLibrary" uid="uid://c6p0i6liykym7" path="res://Animations/npc.res" id="2_icrpt"]
+[ext_resource type="Script" path="res://NPC/NPC_Synchronizer.gd" id="2_tc4iv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xj2y8"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_b0nix"]
+material = SubResource("StandardMaterial3D_xj2y8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8lsjf"]
+albedo_color = Color(0.266667, 0.266667, 0.266667, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4fsaw"]
+material = SubResource("StandardMaterial3D_8lsjf")
+radius = 0.1
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5che"]
+albedo_color = Color(1, 0.211765, 0.298039, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ia3ju"]
+material = SubResource("StandardMaterial3D_i5che")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w307v"]
+albedo_color = Color(0.403922, 0.305882, 0.0588235, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_325ko"]
+material = SubResource("StandardMaterial3D_w307v")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mge5c"]
+albedo_color = Color(0.160784, 0.156863, 0.164706, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_c1p6b"]
+material = SubResource("StandardMaterial3D_mge5c")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="Animation" id="Animation_yi6k5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("root_model:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("root_model/model/hands:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape3D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("root_model/model/head/eye_left:mesh:material:albedo_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.211765, 0.298039, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_064o7"]
+_data = {
+"RESET": SubResource("Animation_yi6k5")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u3gxi"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nvak8"]
+animation = &"npc/die"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hcvhm"]
+animation = &"npc/idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u464h"]
+animation = &"npc/jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ccnya"]
+animation = &"npc/run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2egjk"]
+animation = &"npc/walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lrpqx"]
+animation = &"npc/run_eyes"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_kurrn"]
+input_0/name = "walk"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "jump"
+input_1/auto_advance = false
+input_1/reset = true
+input_2/name = "die"
+input_2/auto_advance = false
+input_2/reset = true
+input_3/name = "run"
+input_3/auto_advance = false
+input_3/reset = true
+input_4/name = "idle"
+input_4/auto_advance = false
+input_4/reset = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_mirxf"]
+graph_offset = Vector2(-1341.77, 142.603)
+nodes/DIE/node = SubResource("AnimationNodeAnimation_nvak8")
+nodes/DIE/position = Vector2(-520, -100)
+nodes/IDLE/node = SubResource("AnimationNodeAnimation_hcvhm")
+nodes/IDLE/position = Vector2(-360, 240)
+nodes/JUMP/node = SubResource("AnimationNodeAnimation_u464h")
+nodes/JUMP/position = Vector2(-560, -280)
+nodes/RUN/node = SubResource("AnimationNodeAnimation_ccnya")
+nodes/RUN/position = Vector2(-920, 100)
+nodes/WALK/node = SubResource("AnimationNodeAnimation_2egjk")
+nodes/WALK/position = Vector2(-300, -340)
+nodes/output/position = Vector2(360, 60)
+nodes/run_eyes/node = SubResource("AnimationNodeAnimation_lrpqx")
+nodes/run_eyes/position = Vector2(-860, 260)
+nodes/state/node = SubResource("AnimationNodeTransition_kurrn")
+nodes/state/position = Vector2(20, 20)
+node_connections = [&"output", 0, &"state", &"state", 0, &"WALK", &"state", 1, &"JUMP", &"state", 2, &"DIE", &"state", 3, &"RUN", &"state", 4, &"IDLE"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vsfmr"]
+properties/0/path = NodePath("root_model:transform")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:transform")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:velocity")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:target_player")
+properties/3/spawn = false
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:target_player_position")
+properties/4/spawn = false
+properties/4/replication_mode = 1
+properties/5/path = NodePath(".:current_animation")
+properties/5/spawn = false
+properties/5/replication_mode = 1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_yyl76"]
+radius = 10.0
+
+[node name="NPC_1" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_c0k4f")
+
+[node name="root_model" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="model" type="Node3D" parent="root_model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="corp" type="MeshInstance3D" parent="root_model/model"]
+mesh = SubResource("CapsuleMesh_b0nix")
+skeleton = NodePath("../../..")
+
+[node name="head" type="Node3D" parent="root_model/model"]
+
+[node name="head" type="MeshInstance3D" parent="root_model/model/head"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.6, -0.429)
+mesh = SubResource("CapsuleMesh_4fsaw")
+skeleton = NodePath("../../corp")
+
+[node name="eye_left" type="MeshInstance3D" parent="root_model/model/head"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.25, 0.8, -0.3)
+mesh = SubResource("SphereMesh_ia3ju")
+skeleton = NodePath("../head")
+
+[node name="eye_right" type="MeshInstance3D" parent="root_model/model/head"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.25, 0.8, -0.3)
+mesh = SubResource("SphereMesh_325ko")
+skeleton = NodePath("../head")
+
+[node name="hands" type="Node3D" parent="root_model/model"]
+
+[node name="hand_left" type="MeshInstance3D" parent="root_model/model/hands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0, -0.593364)
+mesh = SubResource("SphereMesh_c1p6b")
+skeleton = NodePath("../../corp")
+
+[node name="hand_right" type="MeshInstance3D" parent="root_model/model/hands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0, -0.293364)
+mesh = SubResource("SphereMesh_c1p6b")
+skeleton = NodePath("../../corp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="root_model/model"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_064o7"),
+"npc": ExtResource("2_icrpt")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_u3gxi")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_064o7"),
+"npc": ExtResource("2_icrpt")
+}
+tree_root = SubResource("AnimationNodeBlendTree_mirxf")
+anim_player = NodePath("../root_model/model/AnimationPlayer")
+parameters/state/current_state = "run"
+parameters/state/transition_request = ""
+parameters/state/current_index = 3
+
+[node name="NPC_Synchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_vsfmr")
+script = ExtResource("2_tc4iv")
+
+[node name="ActivationArea" type="Area3D" parent="."]
+
+[node name="ActivationBoundry" type="CollisionShape3D" parent="ActivationArea"]
+shape = SubResource("CylinderShape3D_yyl76")
+
+[connection signal="body_entered" from="ActivationArea" to="NPC_Synchronizer" method="_on_body_entered"]
+[connection signal="body_exited" from="ActivationArea" to="NPC_Synchronizer" method="_on_body_exited"]

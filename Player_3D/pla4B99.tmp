@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnfxgkdfg0ijm"]
+
+[ext_resource type="Script" path="res://Player_3D/player_3d.gd" id="1_42266"]
+[ext_resource type="Script" path="res://Player_3D/PlayerInput.gd" id="2_0ihi8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u3gxi"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_b0nix"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_xoxlv"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:player")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+properties/2/path = NodePath(".:velocity")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_cmtt2"]
+properties/0/path = NodePath(".:direction")
+properties/0/spawn = false
+properties/0/replication_mode = 1
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_42266")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_u3gxi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_b0nix")
+
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_xoxlv")
+
+[node name="PlayerInput" type="MultiplayerSynchronizer" parent="." node_paths=PackedStringArray("camera_base", "camera_rotation")]
+root_path = NodePath(".")
+replication_config = SubResource("SceneReplicationConfig_cmtt2")
+script = ExtResource("2_0ihi8")
+camera_base = NodePath("../Camera_Base")
+camera_rotation = NodePath("../Camera_Base/Camera_Rotation")
+
+[node name="Camera_Base" type="Node3D" parent="."]
+
+[node name="Camera_Rotation" type="Node3D" parent="Camera_Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Camera_Base/Camera_Rotation"]
+collision_mask = 2
+spring_length = 2.5
+
+[node name="Camera3D" type="Camera3D" parent="Camera_Base/Camera_Rotation/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.956305, 0.292372, 0, -0.292372, 0.956305, 0, 0, 2)

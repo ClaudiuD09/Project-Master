@@ -1,0 +1,377 @@
+[gd_scene load_steps=6 format=3 uid="uid://c45ltv5uknxh0"]
+
+[ext_resource type="Script" path="res://Network/multiplayer_ui.gd" id="1_tmm3y"]
+[ext_resource type="ButtonGroup" uid="uid://dxe6hvcs15yey" path="res://Assets/multiplayer_ui_character_choose.tres" id="2_d2do8"]
+[ext_resource type="PackedScene" uid="uid://vxhyo65bny5r" path="res://Chat/Chat.tscn" id="2_ngblw"]
+[ext_resource type="Animation" uid="uid://7miamewp14ko" path="res://Animations/loading.res" id="6_5fmf1"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a35jt"]
+_data = {
+"loading": ExtResource("6_5fmf1")
+}
+
+[node name="Multiplayer_UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tmm3y")
+
+[node name="Level" type="Node" parent="."]
+
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Maps_3D/main.tscn", "res://Maps_2D/main.tscn")
+spawn_path = NodePath("../Level")
+spawn_limit = 1
+
+[node name="UI" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.262745, 0.458824, 0.309804, 1)
+
+[node name="Network" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Net" type="VBoxContainer" parent="UI/Network"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -230.0
+offset_right = 350.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Options" type="HBoxContainer" parent="UI/Network/Net"]
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="UI/Network/Net/Options"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Network/Net/Options"]
+layout_mode = 2
+text = "Setup Connect:"
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="UI/Network/Net/Options"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Network/Net/Options"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CreateLan" type="Button" parent="UI/Network/Net/Options/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+text = "Create Server Lan"
+
+[node name="CreateOnline" type="Button" parent="UI/Network/Net/Options/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+disabled = true
+text = "Create Server Online"
+
+[node name="Join" type="Button" parent="UI/Network/Net/Options"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Join Server"
+
+[node name="Remote" type="LineEdit" parent="UI/Network/Net/Options"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "127.0.0.1"
+placeholder_text = "Enter IP"
+alignment = 1
+max_length = 16
+expand_to_text_length = true
+
+[node name="HSplitContainer3" type="HSplitContainer" parent="UI/Network/Net/Options"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="ip_show" type="Label" parent="UI/Network/Net"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="version" type="Label" parent="UI/Network/Net"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Space" type="VSplitContainer" parent="UI/Network/Net"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="Name" type="HBoxContainer" parent="UI/Network/Net"]
+layout_mode = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="UI/Network/Net/Name"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="user_name" type="LineEdit" parent="UI/Network/Net/Name"]
+custom_minimum_size = Vector2(80, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Enter Name"
+alignment = 1
+max_length = 10
+expand_to_text_length = true
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="UI/Network/Net/Name"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="Name_label" type="HBoxContainer" parent="UI/Network/Net"]
+layout_mode = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="UI/Network/Net/Name_label"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="user_name" type="Label" parent="UI/Network/Net/Name_label"]
+custom_minimum_size = Vector2(80, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="UI/Network/Net/Name_label"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="Space2" type="VSplitContainer" parent="UI/Network/Net"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Character_Selector" type="HBoxContainer" parent="UI/Network/Net"]
+layout_mode = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="UI/Network/Net/Character_Selector"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="C1" type="Button" parent="UI/Network/Net/Character_Selector"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = ExtResource("2_d2do8")
+text = "Character NO:1"
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="UI/Network/Net/Character_Selector"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="C2" type="Button" parent="UI/Network/Net/Character_Selector"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = ExtResource("2_d2do8")
+text = "Character NO:2"
+
+[node name="HSplitContainer3" type="HSplitContainer" parent="UI/Network/Net/Character_Selector"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="version2" type="Label" parent="UI/Network/Net"]
+layout_mode = 2
+text = "Select Character !"
+horizontal_alignment = 1
+
+[node name="ip_show2" type="Label" parent="UI/Network/Net"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Browser_Setup" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Chat" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Chat"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -250.0
+offset_top = 30.0
+offset_right = -50.0
+offset_bottom = 390.0
+grow_horizontal = 0
+
+[node name="ColorRect" type="ColorRect" parent="Chat/VBoxContainer"]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+color = Color(0.145098, 0.145098, 0.145098, 1)
+
+[node name="Number_Of_Players" type="Label" parent="Chat/VBoxContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 34.0
+grow_horizontal = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Chat" parent="Chat/VBoxContainer" instance=ExtResource("2_ngblw")]
+process_mode = 3
+custom_minimum_size = Vector2(0, 321)
+layout_mode = 2
+
+[node name="Start_UI" type="CanvasLayer" parent="."]
+layer = 0
+visible = false
+
+[node name="Start_game" type="Button" parent="Start_UI"]
+custom_minimum_size = Vector2(200, 35)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -470.0
+offset_top = 30.0
+offset_right = -270.0
+offset_bottom = 65.0
+grow_horizontal = 0
+focus_mode = 0
+text = "Start Game"
+
+[node name="Game_Buttons" type="CanvasLayer" parent="."]
+layer = 0
+visible = false
+
+[node name="Restart" type="Button" parent="Game_Buttons"]
+custom_minimum_size = Vector2(200, 35)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -470.0
+offset_top = 30.0
+offset_right = -270.0
+offset_bottom = 65.0
+grow_horizontal = 0
+focus_mode = 0
+text = "Restart"
+
+[node name="Lobby" type="Button" parent="Game_Buttons"]
+custom_minimum_size = Vector2(200, 35)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -470.0
+offset_top = 77.0
+offset_right = -270.0
+offset_bottom = 112.0
+grow_horizontal = 0
+focus_mode = 0
+text = "Back to Lobby"
+
+[node name="Loading" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Control" type="Control" parent="Loading"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainLabel" type="Label" parent="Loading/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -286.0
+offset_top = -102.0
+offset_right = 494.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.705882, 0, 0.0313726, 1)
+theme_override_colors/font_shadow_color = Color(0.788235, 0.596078, 0.886275, 1)
+theme_override_font_sizes/font_size = 150
+text = "Loading"
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Loading"]
+libraries = {
+"load": SubResource("AnimationLibrary_a35jt")
+}
+
+[node name="Leaderboard" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Control" type="Control" parent="Leaderboard"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Table" type="VBoxContainer" parent="Leaderboard/Control"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 200.0
+offset_bottom = 200.0
+
+[node name="Label" type="Label" parent="Leaderboard/Control/Table"]
+layout_mode = 2
+text = "Escaped:"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="UI/Network/Net/Options/VBoxContainer/CreateLan" to="." method="_on_create_pressed"]
+[connection signal="pressed" from="UI/Network/Net/Options/VBoxContainer/CreateOnline" to="." method="_on_create_online_pressed"]
+[connection signal="pressed" from="UI/Network/Net/Options/Join" to="." method="_on_join_pressed"]
+[connection signal="text_changed" from="UI/Network/Net/Name/user_name" to="." method="_on_user_name_text_changed"]
+[connection signal="pressed" from="UI/Network/Net/Character_Selector/C1" to="." method="_on_c_1_pressed"]
+[connection signal="pressed" from="UI/Network/Net/Character_Selector/C2" to="." method="_on_c_2_pressed"]
+[connection signal="pressed" from="Start_UI/Start_game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="Game_Buttons/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Game_Buttons/Lobby" to="." method="_on_lobby_pressed"]

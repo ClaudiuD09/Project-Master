@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://iv3c777i7wm2"]
+
+[ext_resource type="Script" path="res://Maps_3D/main.gd" id="1_0vbyd"]
+[ext_resource type="PackedScene" uid="uid://cuf2ff13nc1me" path="res://Assets/escape/escape.tscn" id="2_u1ka4"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mv3tb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0dbua"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_qwvea"]
+sky_material = SubResource("ProceduralSkyMaterial_0dbua")
+
+[sub_resource type="Environment" id="Environment_upass"]
+background_mode = 2
+sky = SubResource("Sky_qwvea")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u1slx"]
+size = Vector3(100, 0.1, 200)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vjmip"]
+albedo_color = Color(0.180392, 0.180392, 0.180392, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m2cgu"]
+material = SubResource("StandardMaterial3D_vjmip")
+size = Vector3(100, 0.1, 200)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_a71my"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q6sgl"]
+transparency = 1
+albedo_color = Color(0.172549, 0.309804, 0.278431, 0.254902)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_c327b"]
+material = SubResource("StandardMaterial3D_q6sgl")
+size = Vector2(50, 30)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_0vbyd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.321)
+mesh = SubResource("CylinderMesh_mv3tb")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_upass")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -22.7276)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_u1slx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_m2cgu")
+
+[node name="Spawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Player_3D/player_3d.tscn", "res://Player_3D/player_3d_1.tscn")
+spawn_path = NodePath("../Spawn")
+spawn_limit = 4
+
+[node name="NPC_spawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
+
+[node name="NPC_Spawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://NPC/NPC.tscn")
+spawn_path = NodePath("../NPC_spawn")
+spawn_limit = 50
+
+[node name="Escape" parent="." instance=ExtResource("2_u1ka4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -64.083)
+
+[node name="NPC_Regions" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="NPC_Regions"]
+navigation_mesh = SubResource("NavigationMesh_a71my")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NPC_Regions/NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_c327b")
