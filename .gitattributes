@@ -3,3 +3,5 @@
 *.gd linguist-language=GDScript
 *.gdns linguist-language=GDScript
 *.tres linguist-language=GDScript
+*.html linguist-detectable=false
+*.javascript linguist-detectable=false
