@@ -30,6 +30,18 @@ user experience. Continuous performance monitoring and user feedback integration
 an essential role in the ongoing improvement of the application.
 
 
+![3d](https://github.com/user-attachments/assets/83d38c82-5cb2-48f4-93c1-75fd76dad7a7)
+
+![2d](https://github.com/user-attachments/assets/a22ef7af-557e-477e-9c28-992052d97d73)
+
+![animatie](https://github.com/user-attachments/assets/7bea40a7-16d1-4345-8da4-f2d0eaac9123)
+
+![joystick](https://github.com/user-attachments/assets/3fa87494-6f00-4672-a902-db073ea68c27)
+
+![scena](https://github.com/user-attachments/assets/06c0e931-f98c-494a-b7cf-f4763b0d8287)
+
+![retea](https://github.com/user-attachments/assets/69958cfd-dc10-43d6-bb97-b363328278d1)
+
 
 
 
